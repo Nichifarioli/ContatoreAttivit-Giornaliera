@@ -5,20 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContatoreAttivitàGiornaliera"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Contatore Attività Giornaliera" Height="450" Width="800"
+        ResizeMode="CanResizeWithGrip">
+
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Input attività -->
-            <RowDefinition Height="Auto"/> <!-- Lista attività -->
-            <RowDefinition Height="Auto"/> <!-- Timer e controlli-->
-            <RowDefinition Height="Auto"/> <!-- comppletamento e riepilogo-->
-            <RowDefinition Height="*"/> <!--Spazio vuoto / espansione -->
+            <RowDefinition Height="Auto"/>
+            <!-- Inserimento attività -->
+            <RowDefinition Height="Auto"/>
+            <!-- Lista attività -->
+            <RowDefinition Height="Auto"/>
+            <!-- Timer -->
+            <RowDefinition Height="Auto"/>
+            <!-- Controlli -->
+            <RowDefinition Height="*"/>
+            <!-- Completate + Tema -->
         </Grid.RowDefinitions>
+
         <!-- Inserimento attività -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
             <Label Content="Nome dell'attività:" VerticalAlignment="Center"/>
             <TextBox x:Name="txtNome" Width="200" Margin="10,0"/>
-            <Button x:Name="btnAggiungiAttività" Content="Aggiungi" Width="100" Height="30" Click="btnAggiungiAttività_Click" />
+            <Button x:Name="btnAggiungiAttività" Content="Aggiungi" Width="100" Height="30" Click="btnAggiungiAttività_Click"/>
         </StackPanel>
 
         <!-- Lista attività -->
@@ -27,22 +35,42 @@
             <ListBox x:Name="lstAttivita" Height="120" Width="300"/>
         </StackPanel>
 
-        <!-- Controlli timer -->
+        <!-- Timer e controlli -->
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,0,0,10">
-            <Button x:Name="btnAvvioTimer" Content="Avvia il timer" Width="100" Click="btnAvvioTimer_Click"/>
-            <Label Content="Durata (min):" VerticalAlignment="Center"/>
-            <TextBox x:Name="txtDurata" Width="100" Margin="5,0"/>
+            <Button x:Name="btnAvvioTimer" Content="Avvia Timer" Width="100" Click="btnAvvioTimer_Click"/>
+            <Label Content="Durata (min):" VerticalAlignment="Center" Margin="10,0,5,0"/>
+            <TextBox x:Name="txtDurata" Width="60"/>
             <Button x:Name="btnStopTimer" Content="Stop Timer" Width="100" Margin="10,0,0,0" Click="btnStopTimer_Click"/>
-            <Label Content="Il tempo rimanente è:" VerticalAlignment="Center" Margin="10,0"/>
+            <Label Content="Tempo rimanente:" VerticalAlignment="Center" Margin="20,0,5,0"/>
             <Label x:Name="lblTimer" Content="00:00" FontSize="24" Foreground="DarkRed" VerticalAlignment="Center"/>
         </StackPanel>
 
-        <!-- Completamento e riepilogo -->
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,10,0,0">
-            <Button x:Name="btnSegnaCompletata" Content="Segna Completata" Width="130" Click="btnSegnaCompletata_Click"/>
-            <Button x:Name="btnRiepilogo" Content="Mostra Riepilogo" Width="130" Margin="10,0" Click="btnRiepilogo_Click"/>
+        <!-- Completamento attività e riepilogo -->
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,0,0,10">
+            <Button x:Name="btnSegnaCompletata" Content="Segna Completata" Width="150" Click="btnSegnaCompletata_Click"/>
+            <Button x:Name="btnRiepilogo" Content="Mostra Riepilogo" Width="150" Margin="10,0" Click="btnRiepilogo_Click"/>
         </StackPanel>
-        <!-- Label attività completate -->
-        <Label x:Name="lblCompletate" Content="Attività completate: 0" Grid.Row="4" FontWeight="Bold" FontSize="16"/>
-         </Grid>
+
+        <!-- Riepilogo + tema notte -->
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Label attività completate -->
+            <Label x:Name="lblCompletate"
+                   Content="Attività completate: 0"
+                   FontWeight="Bold"
+                   FontSize="16"
+                   VerticalAlignment="Center"/>
+
+            <!-- Pulsante modalità notte -->
+            <Button x:Name="btnCambiaTema"
+                    Content="🌙 Modalità Notte"
+                    Click="btnCambiaTema_Click"
+                    Margin="565,2,23,0"
+                    VerticalAlignment="Top" Height="50"/>
+        </Grid>
+    </Grid>
 </Window>

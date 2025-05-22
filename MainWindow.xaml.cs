@@ -232,5 +232,28 @@ namespace ContatoreAttivitàGiornaliera
             FinestraStatistiche finestraStat = new FinestraStatistiche(tutteAttivita, totaleCompletate);
             finestraStat.ShowDialog();
         }
+
+        private bool temaScuroAttivo = false; // stato corrente del tema
+        private void btnCambiaTema_Click(object sender, RoutedEventArgs e)
+        {
+            string tema = temaScuroAttivo ? "LightTheme.xaml" : "DarkTheme.xaml";
+            string uri = $"Themes/{tema}";
+
+            // Pulisce i dizionari attuali
+            Application.Current.Resources.MergedDictionaries.Clear();
+
+            // Carica il nuovo tema
+            var themeDict = new ResourceDictionary();
+            themeDict.Source = new Uri(uri, UriKind.Relative);
+            Application.Current.Resources.MergedDictionaries.Add(themeDict);
+
+            // Cambia il contenuto del pulsante
+            Button btn = sender as Button;
+            btn.Content = temaScuroAttivo ? "☀️ Modalità Giorno" : "🌙 Modalità Notte";
+
+
+            // Cambia lo stato
+            temaScuroAttivo = !temaScuroAttivo;
+        }
     }
 }
