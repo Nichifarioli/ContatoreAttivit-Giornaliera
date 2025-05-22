@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- COLORI -->
+    <Color x:Key="BackgroundColor">#FFFFFFFF</Color>
+    <!-- Bianco -->
+    <Color x:Key="ForegroundColor">#FF000000</Color>
+    <!-- Nero -->
+    <Color x:Key="ButtonBackgroundColor">#FFDDDDDD</Color>
+    <!-- Grigio chiaro -->
+    <Color x:Key="ButtonForegroundColor">#FF000000</Color>
+    <!-- Nero -->
+
+    <!-- PENNELLI -->
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}" />
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}" />
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{StaticResource ButtonBackgroundColor}" />
+    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource ButtonForegroundColor}" />
+
+    <!-- STILE PER BUTTON -->
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource ButtonForegroundBrush}" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="BorderBrush" Value="Gray" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- STILE PER TEXTBLOCK -->
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+    <!-- STILE PER TEXTBOX -->
+    <Style TargetType="TextBox">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="BorderBrush" Value="Gray" />
+    </Style>
+
+    <!-- STILE PER LISTBOX -->
+    <Style TargetType="ListBox">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="BorderBrush" Value="Gray" />
+    </Style>
+
+</ResourceDictionary>
