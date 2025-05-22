@@ -120,6 +120,31 @@ namespace ContatoreAttivitàGiornaliera
             }
         }
 
+        private void btnStopTimer_Click(object sender, RoutedEventArgs e)
+        {
+            if (timer.IsEnabled)
+            {
+                timer.Stop(); // Ferma il timer
+
+                //Resetta label timer
+                lblTimer.Content = "00:00";
+                this.Title = "Contatore Attività Giornaliere";
+
+                //Riattiva i pulsanti
+                btnAggiungiAttività.IsEnabled = true;
+                btnSegnaCompletata.IsEnabled = true;
+                btnAvvioTimer.IsEnabled = true;
+
+                //Suono di notifica
+                System.Media.SystemSounds.Asterisk.Play();
+            }
+            else
+            {
+                MessageBox.Show("Il timer non è attivo.", "Informazione", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Media.SystemSounds.Exclamation.Play();
+            }
+        }
+
         private void btnSegnaCompletata_Click(object sender, RoutedEventArgs e)
         {
             //Verifica che un’attività sia selezionata.
