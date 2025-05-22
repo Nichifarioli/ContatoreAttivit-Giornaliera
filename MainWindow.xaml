@@ -30,6 +30,8 @@
         <!-- Controlli timer -->
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,0,0,10">
             <Button x:Name="btnAvvioTimer" Content="Avvia il timer" Width="100" Click="btnAvvioTimer_Click"/>
+            <Label Content="Durata (min):" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtDurata" Width="100" Margin="5,0"/>
             <Button x:Name="btnStopTimer" Content="Stop Timer" Width="100" Margin="10,0,0,0" Click="btnStopTimer_Click"/>
             <Label Content="Il tempo rimanente è:" VerticalAlignment="Center" Margin="10,0"/>
             <Label x:Name="lblTimer" Content="00:00" FontSize="24" Foreground="DarkRed" VerticalAlignment="Center"/>

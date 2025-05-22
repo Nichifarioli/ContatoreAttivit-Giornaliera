@@ -90,12 +90,26 @@ namespace ContatoreAttivitàGiornaliera
                 return;
             }
 
-            //verifio sia stata selezionata un'attività nella listbox 
+
+            //avendo aggiunto la textbox "Durata(min), leggo il valore inserito 
+            if(!int.TryParse(txtDurata.Text, out int minutes) || minutes <= 0)
+            {
+                //messaggio di errore e suono 
+                MessageBox.Show("La durata (min) non è valida!", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //Suono di errore
+                SystemSounds.Hand.Play();
+                return;
+
+            }
+
+            //verifico sia stata selezionata un'attività nella listbox 
             if (lstAttivita.SelectedItem != null)
             //imposto il tempo iniziale 
             {
-                secondiRimanenti = 60; // per esempio 1 minuto
-                lblTimer.Content = "01:00";
+                secondiRimanenti = 60*minutes; // per esempio 1 minuto
+                TimeSpan time = TimeSpan.FromSeconds(secondiRimanenti);
+                lblTimer.Content = time.ToString(@"mm\:ss");
+                this.Title = $"Tempo rimanente: {time.ToString(@"mm\:ss")}";
                 timer.Start();//avvio il timer 
 
                 // Disattiva i pulsanti
