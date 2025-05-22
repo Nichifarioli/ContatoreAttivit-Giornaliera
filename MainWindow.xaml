@@ -41,5 +41,5 @@
         </StackPanel>
         <!-- Label attività completate -->
         <Label x:Name="lblCompletate" Content="Attività completate: 0" Grid.Row="4" FontWeight="Bold" FontSize="16"/>
-    </Grid>
+         </Grid>
 </Window>

@@ -11,7 +11,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Collections.Generic;  
+using System.Collections.Generic;
+using System.Media; //Serve per i suoni windows
 
 namespace ContatoreAttivitàGiornaliera
 {
@@ -54,16 +55,24 @@ namespace ContatoreAttivitàGiornaliera
                     lstAttivita.Items.Add(txtNome.Text);
                     //incremento contatore attività inserite
                     attivitaTotali++;
+
+                    //Suono informativo: attività aggiunta con successo
+                    SystemSounds.Asterisk.Play();
                 }
                 else
                 {
                     MessageBox.Show("Questa attività è già presente nella lista.", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    //Suono di avviso
+                    SystemSounds.Exclamation.Play();
                 }
             }
             else
             {
                 //mostro messaggio di errore 
                 MessageBox.Show("Inserisci un nome valido per l'attività.", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                //Suono di errore
+                SystemSounds.Hand.Play();
             }
             //svuoto textbox 
             txtNome.Clear();
@@ -76,6 +85,8 @@ namespace ContatoreAttivitàGiornaliera
             if (timer.IsEnabled)
             {
                 MessageBox.Show("Il timer è già in esecuzione.", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Suono di avviso
+                SystemSounds.Exclamation.Play();
                 return;
             }
 
@@ -91,6 +102,9 @@ namespace ContatoreAttivitàGiornaliera
                 btnAggiungiAttività.IsEnabled = false;
                 btnSegnaCompletata.IsEnabled = false;
                 btnAvvioTimer.IsEnabled = false; // disabilito anche il pulsante avvio timer
+
+                //  Suono di conferma/inizio
+                SystemSounds.Beep.Play();
             }
             else //mostro il tempo rimanente nella label
             {
@@ -98,6 +112,11 @@ namespace ContatoreAttivitàGiornaliera
                 TimeSpan time = TimeSpan.FromSeconds(secondiRimanenti);
                 lblTimer.Content = time.ToString(@"mm\:ss");
                 this.Title = $"Tempo rimanente: {time.ToString(@"mm\:ss")}";
+
+                MessageBox.Show("Seleziona un'attività prima di avviare il timer.", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                //Suono di errore
+                SystemSounds.Hand.Play();
             }
         }
 
