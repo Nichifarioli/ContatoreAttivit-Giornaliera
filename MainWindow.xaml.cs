@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Collections.Generic;  
 
 namespace ContatoreAttivitàGiornaliera
 {
@@ -27,12 +28,13 @@ namespace ContatoreAttivitàGiornaliera
         //variabile booleana per controllare attività completate
         private List<string> completate = new List<string>();
         private int attivitaCompletate = 0; //variabile contatore per tenere traccia del numero di attività completate
-        private int attivitaTotali = 0; //cintatore per tenere traccia delle attività aggiunte
+        private int attivitaTotali = 0; //contatore per tenere traccia delle attività aggiunte
         
 
         public MainWindow()
         {
             InitializeComponent(); //inizializzo i componenti
+
             //imposto le proprietà del DispatcherTimer
             timer = new DispatcherTimer();
             //collego evento Tick del timer
@@ -69,6 +71,7 @@ namespace ContatoreAttivitàGiornaliera
 
         private void btnAvvioTimer_Click(object sender, RoutedEventArgs e)
         {
+
             //aggiungo controllo per evitare di avviare il timer quando è già in esecuzione
             if (timer.IsEnabled)
             {
@@ -87,6 +90,7 @@ namespace ContatoreAttivitàGiornaliera
                 // Disattiva i pulsanti
                 btnAggiungiAttività.IsEnabled = false;
                 btnSegnaCompletata.IsEnabled = false;
+                btnAvvioTimer.IsEnabled = false; // disabilito anche il pulsante avvio timer
             }
             else //mostro il tempo rimanente nella label
             {
@@ -126,13 +130,19 @@ namespace ContatoreAttivitàGiornaliera
         //aggiungo metodo da eseguire ogni volta che il timer fa "Tick"
         private void Timer_Tick(object sender, EventArgs e)
         {
-            secondiRimanenti--;
+            if (secondiRimanenti > 0)
+            {
+                secondiRimanenti--;
+                int minuti = secondiRimanenti / 60;
+                int secondi = secondiRimanenti % 60;
+                lblTimer.Content = $"{minuti:D2}:{secondi:D2}";
+                // Mostra il tempo rimanente nella finestra (puoi creare una Label per questo)
+                TimeSpan time = TimeSpan.FromSeconds(secondiRimanenti);
+                lblTimer.Content = time.ToString(@"mm\:ss");
+                this.Title = $"Tempo rimanente: {time.ToString(@"mm\:ss")}";
+            }
 
-            int minuti = secondiRimanenti / 60;
-            int secondi = secondiRimanenti % 60;
-            lblTimer.Content = $"{minuti:D2}:{secondi:D2}";
-
-            if (secondiRimanenti <= 0)
+            else
             {
                 timer.Stop();
                 MessageBox.Show("Tempo scaduto per l'attività selezionata!");
@@ -140,6 +150,7 @@ namespace ContatoreAttivitàGiornaliera
                 // Riattiva i pulsanti
                 btnAggiungiAttività.IsEnabled = true;
                 btnSegnaCompletata.IsEnabled = true;
+                btnAvvioTimer.IsEnabled = true;
             }
         }
 
