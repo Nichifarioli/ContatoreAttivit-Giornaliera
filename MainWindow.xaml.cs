@@ -23,8 +23,7 @@ namespace ContatoreAttivitàGiornaliera
         private int secondiRimanenti; //contatore dei secondi rimanenti
         private DispatcherTimer timer; //timer
 
-        //variabile stringa per inserire i nomi delle attività 
-        string[] attivita = new string[100];
+        
         //variabile booleana per controllare attività completate
         private List<string> completate = new List<string>();
         private int attivitaCompletate = 0; //variabile contatore per tenere traccia del numero di attività completate
@@ -70,6 +69,13 @@ namespace ContatoreAttivitàGiornaliera
 
         private void btnAvvioTimer_Click(object sender, RoutedEventArgs e)
         {
+            //aggiungo controllo per evitare di avviare il timer quando è già in esecuzione
+            if (timer.IsEnabled)
+            {
+                MessageBox.Show("Il timer è già in esecuzione.", "Attenzione", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             //verifio sia stata selezionata un'attività nella listbox 
             if (lstAttivita.SelectedItem != null)
             //imposto il tempo iniziale 
@@ -84,14 +90,14 @@ namespace ContatoreAttivitàGiornaliera
             }
             else //mostro il tempo rimanente nella label
             {
-                // Mostra il tempo rimanente nella finestra (puoi creare una Label per questo)
+                // Mostra il tempo rimanente nella finestra (creo una Label per questo)
                 TimeSpan time = TimeSpan.FromSeconds(secondiRimanenti);
                 lblTimer.Content = time.ToString(@"mm\:ss");
                 this.Title = $"Tempo rimanente: {time.ToString(@"mm\:ss")}";
             }
         }
 
-        private void btnSegnaCompletata_Click(object sender, EventArgs e)
+        private void btnSegnaCompletata_Click(object sender, RoutedEventArgs e)
         {
             //Verifica che un’attività sia selezionata.
             if (lstAttivita.SelectedItem != null)
@@ -137,7 +143,7 @@ namespace ContatoreAttivitàGiornaliera
             }
         }
 
-        private void btnRiepilogo_Click(object sender, EventArgs e)
+        private void btnRiepilogo_Click(object sender, RoutedEventArgs e)
         {
             //conto attività completate 
             // Conta quante attività sono state completate

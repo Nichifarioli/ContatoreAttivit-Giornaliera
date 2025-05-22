@@ -11,7 +11,8 @@
             <RowDefinition Height="Auto"/> <!-- Input attività -->
             <RowDefinition Height="Auto"/> <!-- Lista attività -->
             <RowDefinition Height="Auto"/> <!-- Timer e controlli-->
-            <RowDefinition Height="*"/> <!-- comppletamento e riepilogo-->
+            <RowDefinition Height="Auto"/> <!-- comppletamento e riepilogo-->
+            <RowDefinition Height="*"/> <!--Spazio vuoto / espansione -->
         </Grid.RowDefinitions>
         <!-- Inserimento attività -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
@@ -21,9 +22,9 @@
         </StackPanel>
 
         <!-- Lista attività -->
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,10">
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
             <Label Content="Attività aggiunte:"/>
-            <ListBox x:Name="lstAttivita" Height="120"/>
+            <ListBox x:Name="lstAttivita" Height="120" Width="300"/>
         </StackPanel>
 
         <!-- Controlli timer -->
@@ -38,6 +39,6 @@
             <Button x:Name="btnSegnaCompletata" Content="Segna Completata" Width="130" Click="btnSegnaCompletata_Click"/>
             <Button x:Name="btnRiepilogo" Content="Mostra Riepilogo" Width="130" Margin="10,0" Click="btnRiepilogo_Click"/>
         </StackPanel>
-        <Label x:Name="lblCompletate" Content="Attività completate: 0" Margin="10,260,0,0" Grid.Row="3" FontWeight="Bold"/>
-    </Grid>
+        <!-- Label attività completate -->
+        <Label x:Name="lblCompletate" Content="Attività completate: 0" Grid.Row="4" FontWeight="Bold" FontSize="16"/>
 </Window>
