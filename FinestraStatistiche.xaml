@@ -7,6 +7,37 @@
         mc:Ignorable="d"
         Title="FinestraStatistiche" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Input attività -->
+            <RowDefinition Height="Auto"/> <!-- Lista attività -->
+            <RowDefinition Height="Auto"/> <!-- Timer e controlli-->
+            <RowDefinition Height="Auto"/> <!-- comppletamento e riepilogo-->
+            <RowDefinition Height="*"/> <!--Spazio vuoto / espansione -->
+        </Grid.RowDefinitions>
         
+        <!--inserimento totale attività completate-->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+            <Label Content="Totale attività completate:" VerticalAlignment="Center"/>
+            <TextBlock x:Name="txtTotaleCompletate" Width="50" Margin="10,0" VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        <!--listbox per inserimento elenco attività-->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,10">
+            <Label Content="Elenco delle attività:"/>
+            <ListBox x:Name="lstAttivitaGiornaliere" Height="120" Width="300" VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        <!--label per percentuale di completamento attività-->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,0,0,10">
+            <Label Content="Percentuale completamento:" VerticalAlignment="Center"/>
+            <TextBlock x:Name="txtPercentuale" Width="50" Margin="10,0" VerticalAlignment="Center"/>
+            <ProgressBar x:Name="progressBarPercentuale" Width="200" Height="20" Minimum="0" Maximum="100" Value="0" Margin="10,0"/>
+        </StackPanel>
+        
+        <!--bottone chiudi per tornare alla finestra principale-->
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,0,0,10">
+            <Button x:Name="btnChiudi" Content="Chiudi" Width="100" Click="btnChiudi_Click"/>
+        </StackPanel>
+
     </Grid>
 </Window>

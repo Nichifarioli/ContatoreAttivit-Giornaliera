@@ -23,5 +23,11 @@ namespace ContatoreAttivitàGiornaliera
         {
             InitializeComponent();
         }
+
+
+        private void btnChiudi_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
