@@ -214,29 +214,23 @@ namespace ContatoreAttivitàGiornaliera
 
         private void btnRiepilogo_Click(object sender, RoutedEventArgs e)
         {
-            //conto attività completate 
-            // Conta quante attività sono state completate
+            // Creo una lista di tutte le attività: quelle ancora non completate + quelle completate
+            List<string> tutteAttivita = new List<string>();
+
+            // Aggiungo attività dalla ListBox attuali (non completate)
+            foreach (var item in lstAttivita.Items)
+            {
+                tutteAttivita.Add(item.ToString());
+            }
+
+            // Aggiungo quelle completate
+            tutteAttivita.AddRange(completate);
+
             int totaleCompletate = completate.Count;
 
-            // Se nessuna attività è stata completata, mostra un messaggio diverso
-            if (totaleCompletate == 0)
-            {
-                MessageBox.Show("Non hai completato ancora nessuna attività oggi!", "Riepilogo", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                // Crea il messaggio di riepilogo
-                string riepilogo = $"Hai completato {totaleCompletate} attività:\n";
-
-                // Aggiungi l’elenco delle attività completate
-                foreach (string attivita in completate)
-                {
-                    riepilogo += $"- {attivita}\n";
-                }
-
-                //mostro messaggio di riepilogo
-                MessageBox.Show(riepilogo, "Riepilogo attività completate", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            // Apro la finestra statistiche passando i dati
+            FinestraStatistiche finestraStat = new FinestraStatistiche(tutteAttivita, totaleCompletate);
+            finestraStat.ShowDialog();
         }
     }
 }
